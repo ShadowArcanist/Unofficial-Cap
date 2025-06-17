@@ -57,7 +57,7 @@ jobs:
           mv "$ZIP_NAME" "$GITHUB_WORKSPACE/"
 
       - name: Upload macOS‑Silicon Production build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cap-macos-silicon-production
           path: cap-macos-silicon-production.zip
