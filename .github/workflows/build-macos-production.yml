@@ -41,7 +41,6 @@ jobs:
           pnpm tauri build \
             --config src-tauri/tauri.prod.conf.json \
             --target aarch64-apple-darwin \
-            --no-bundle
         env:
           RUST_TARGET_TRIPLE: aarch64-apple-darwin
 
