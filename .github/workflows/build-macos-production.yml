@@ -27,7 +27,6 @@ jobs:
       - name: Prepare environment
         run: |
           echo "VITE_ENVIRONMENT=production" > .env
-          # add any other env vars your app needs here
           cat .env
 
       - name: Install JS deps & Cap setup
@@ -40,23 +39,12 @@ jobs:
         run: |
           pnpm tauri build \
             --config src-tauri/tauri.prod.conf.json \
-            --target aarch64-apple-darwin \
+            --target aarch64-apple-darwin
         env:
           RUST_TARGET_TRIPLE: aarch64-apple-darwin
 
-      - name: Package .app as ZIP
-        run: |
-          DIST_DIR="apps/desktop/src-tauri/target/aarch64-apple-darwin/release/bundle/macos"
-          APP_NAME="Cap.app"
-          ZIP_NAME="cap-macos-silicon-production.zip"
-
-          # adjust path if your Tauri config outputs elsewhere
-          cd "$DIST_DIR"
-          zip -r "$ZIP_NAME" "$APP_NAME"
-          mv "$ZIP_NAME" "$GITHUB_WORKSPACE/"
-
-      - name: Upload macOS‑Silicon Production build
+      - name: Upload macOS‑Silicon Production DMG
         uses: actions/upload-artifact@v4
         with:
-          name: cap-macos-silicon-production
-          path: cap-macos-silicon-production.zip
+          name: cap-macos-silicon-production-dmg
+          path: apps/desktop/src-tauri/target/aarch64-apple-darwin/release/bundle/dmg/*.dmg
