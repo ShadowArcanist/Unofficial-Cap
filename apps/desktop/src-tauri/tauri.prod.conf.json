@@ -12,6 +12,7 @@
     }
   },
   "bundle": {
+    "createUpdaterArtifacts": false,
     "macOS": {
       "entitlements": "Entitlements.plist"
     },
